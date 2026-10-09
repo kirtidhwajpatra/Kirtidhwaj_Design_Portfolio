@@ -2509,10 +2509,10 @@ class WorkTabs {
     constructor() {
         this.stage = document.getElementById('workTabsStage');
         this.allTabs = [
+            { id: 'identity', btn: document.getElementById('tabIdentity'), panel: document.getElementById('panelIdentity') },
             { id: 'uiux', btn: document.getElementById('tabUiUx'), panel: document.getElementById('panelUiUx') },
             { id: 'social', btn: document.getElementById('tabSocial'), panel: document.getElementById('panelSocial') },
             { id: 'print', btn: document.getElementById('tabPrint'), panel: document.getElementById('panelPrint') },
-            { id: 'identity', btn: document.getElementById('tabIdentity'), panel: document.getElementById('panelIdentity') },
             { id: 'branding', btn: document.getElementById('tabBranding'), panel: document.getElementById('panelBranding') }
         ];
         // Only active/visible tabs participate in selection and keyboard navigation
@@ -2969,6 +2969,13 @@ class CreativesProgressLoader {
     constructor() {
         this.sections = [
             {
+                id: 'identity',
+                panel: document.getElementById('panelIdentity'),
+                loader: document.getElementById('identityCreativesLoader'),
+                loaderWrapper: document.getElementById('identityCreativesLoaderWrapper'),
+                itemSelector: '.identity-card img'
+            },
+            {
                 id: 'uiux',
                 panel: document.getElementById('panelUiUx'),
                 loader: document.getElementById('uiuxCreativesLoader'),
@@ -2981,13 +2988,6 @@ class CreativesProgressLoader {
                 loader: document.getElementById('socialCreativesLoader'),
                 loaderWrapper: document.getElementById('socialCreativesLoaderWrapper'),
                 itemSelector: '.social-post-card img, .social-post-card video'
-            },
-            {
-                id: 'identity',
-                panel: document.getElementById('panelIdentity'),
-                loader: document.getElementById('identityCreativesLoader'),
-                loaderWrapper: document.getElementById('identityCreativesLoaderWrapper'),
-                itemSelector: '.identity-card img'
             }
         ];
 
