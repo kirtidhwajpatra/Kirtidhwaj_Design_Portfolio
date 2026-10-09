@@ -2551,6 +2551,9 @@ class WorkTabs {
         if (window.videoHandlerInstance) {
             window.videoHandlerInstance.refresh();
         }
+        if (window.creativesLoaderInstance) {
+            window.creativesLoaderInstance.refresh();
+        }
     }
 }
 
@@ -2962,11 +2965,134 @@ function initSocialModal() {
     });
 }
 
+class CreativesProgressLoader {
+    constructor() {
+        this.sections = [
+            {
+                id: 'uiux',
+                panel: document.getElementById('panelUiUx'),
+                loader: document.getElementById('uiuxCreativesLoader'),
+                loaderWrapper: document.getElementById('uiuxCreativesLoaderWrapper'),
+                itemSelector: '.video-item img, .video-item video'
+            },
+            {
+                id: 'social',
+                panel: document.getElementById('panelSocial'),
+                loader: document.getElementById('socialCreativesLoader'),
+                loaderWrapper: document.getElementById('socialCreativesLoaderWrapper'),
+                itemSelector: '.social-post-card img, .social-post-card video'
+            },
+            {
+                id: 'identity',
+                panel: document.getElementById('panelIdentity'),
+                loader: document.getElementById('identityCreativesLoader'),
+                loaderWrapper: document.getElementById('identityCreativesLoaderWrapper'),
+                itemSelector: '.identity-card img'
+            }
+        ];
+
+        this.init();
+    }
+
+    init() {
+        this.setupPreloadObserver();
+
+        this.sections.forEach(section => {
+            if (!section.panel) return;
+            const items = Array.from(section.panel.querySelectorAll(section.itemSelector));
+            section.total = items.length;
+            section.loaded = 0;
+
+            items.forEach(el => {
+                const markLoaded = () => {
+                    const card = el.closest('.social-post-card, .identity-card, .video-item');
+                    if (card) {
+                        card.classList.add('is-loaded', 'loaded');
+                    }
+                    if (!el._creativesCounted) {
+                        el._creativesCounted = true;
+                        section.loaded++;
+                        this.updateSectionStatus(section);
+                    }
+                };
+
+                if (el.tagName.toLowerCase() === 'img') {
+                    if (el.complete && el.naturalWidth > 0) {
+                        markLoaded();
+                    } else {
+                        el.addEventListener('load', markLoaded, { once: true });
+                        el.addEventListener('error', markLoaded, { once: true });
+                    }
+                } else if (el.tagName.toLowerCase() === 'video') {
+                    if (el.readyState >= 2) {
+                        markLoaded();
+                    } else {
+                        el.addEventListener('loadeddata', markLoaded, { once: true });
+                        el.addEventListener('error', markLoaded, { once: true });
+                    }
+                }
+            });
+
+            this.updateSectionStatus(section);
+        });
+
+        // Fallback: hide any lingering loaders after 12 seconds
+        setTimeout(() => {
+            this.sections.forEach(sec => {
+                if (sec.loader) {
+                    sec.loader.classList.remove('is-visible');
+                    sec.loader.classList.add('is-hidden');
+                }
+            });
+        }, 12000);
+    }
+
+    setupPreloadObserver() {
+        if (!('IntersectionObserver' in window)) return;
+        const preloader = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target.querySelector('img[loading="lazy"]');
+                    if (img) {
+                        img.loading = 'eager';
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '800px 0px 800px 0px'
+        });
+
+        document.querySelectorAll('.social-post-card, .identity-card, .video-item').forEach(card => {
+            preloader.observe(card);
+        });
+    }
+
+    updateSectionStatus(section) {
+        if (!section.loader) return;
+        const isFinished = section.loaded >= section.total;
+        if (isFinished) {
+            section.loader.classList.remove('is-visible');
+            section.loader.classList.add('is-hidden');
+        } else {
+            section.loader.classList.remove('is-hidden');
+            section.loader.classList.add('is-visible');
+        }
+    }
+
+    refresh() {
+        this.sections.forEach(section => {
+            this.updateSectionStatus(section);
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     new ThemeManager();
     window.customizationPanelInstance = new CustomizationPanel();
     window.videoHandlerInstance = new VideoHandler();
     window.workTabsInstance = new WorkTabs();
+    window.creativesLoaderInstance = new CreativesProgressLoader();
     initSocialModal();
     initProjectThumbnailLqip();
     initLibrariesInstallCount();
