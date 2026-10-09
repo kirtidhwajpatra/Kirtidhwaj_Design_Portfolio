@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <script>
+        // Set the theme before first paint so the page never flashes light on a dark system.
+        document.documentElement.setAttribute(
+            'data-theme',
+            window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        );
+    </script>
+    <title>Kirtidhwaj Patra — Designer & Engineer</title>
+    <meta name="description" content="Kirtidhwaj Patra — Designer who likes turning ideas into things that actually work. Designing and building across iOS, web, and AI.">
+    <meta property="og:title" content="Kirtidhwaj Patra — Designer & Engineer">
+    <meta property="og:description" content="Designer who likes turning ideas into things that actually work. Designing and building across iOS, web, and AI.">
+    <meta property="og:image" content="https://kirtidhwaj.in/og-image.png">
+    <meta property="og:url" content="https://kirtidhwaj.in">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kirtidhwaj Patra — Designer & Engineer">
+    <meta name="twitter:description" content="Designer who likes turning ideas into things that actually work. Designing and building across iOS, web, and AI.">
+    <meta name="twitter:image" content="https://kirtidhwaj.in/og-image.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=3">
+    <link rel="stylesheet" href="styles.css?v=20260921_11">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="name">Kirtidhwaj Patra</h1>
+            <nav class="nav">
+                <button class="mobile-customize-btn" id="mobileCustomizeBtn">
+                    <svg class="mobile-customize-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.666667 8C0.666667 3.94991 3.94991 0.666667 8 0.666667C12.0501 0.666667 15.3333 3.94991 15.3333 8C15.3333 9.47276 14.1394 10.6667 12.6667 10.6667H12.3333C12.0025 10.6667 11.9017 10.6681 11.826 10.6781C11.2277 10.7568 10.7568 11.2277 10.6781 11.826C10.6681 11.9017 10.6667 12.0025 10.6667 12.3333V12.6667C10.6667 14.1394 9.47276 15.3333 8 15.3333C3.94991 15.3333 0.666667 12.0501 0.666667 8ZM6.66667 3.33333C5.93029 3.33333 5.33333 3.93029 5.33333 4.66667C5.33333 5.40305 5.93029 6 6.66667 6C7.40305 6 8 5.40305 8 4.66667C8 3.93029 7.40305 3.33333 6.66667 3.33333ZM9.33333 5.33333C9.33333 4.59695 9.93029 4 10.6667 4C11.403 4 12 4.59695 12 5.33333C12 6.06971 11.403 6.66667 10.6667 6.66667C9.93029 6.66667 9.33333 6.06971 9.33333 5.33333ZM3.33333 8C3.33333 7.26362 3.93029 6.66667 4.66667 6.66667C5.40305 6.66667 6 7.26362 6 8C6 8.73638 5.40305 9.33333 4.66667 9.33333C3.93029 9.33333 3.33333 8.73638 3.33333 8Z" fill="currentColor"/></svg>
+                    <span>Customize</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <svg id="themeIcon" class="theme-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.04458 1.60806C6.1589 1.35528 6.10472 1.05812 5.90855 0.861947C5.71237 0.665775 5.41522 0.611597 5.16244 0.725914C2.51258 1.92428 0.666626 4.59176 0.666626 7.69181C0.666626 11.9121 4.08786 15.3334 8.30817 15.3334C11.4082 15.3334 14.0757 13.4874 15.2741 10.8375C15.3884 10.5848 15.3342 10.2876 15.138 10.0914C14.9419 9.89526 14.6447 9.84108 14.3919 9.9554C13.6009 10.3131 12.7225 10.5126 11.7956 10.5126C8.31168 10.5126 5.4874 7.6883 5.4874 4.20438C5.4874 3.27752 5.68686 2.39905 6.04458 1.60806Z" fill="currentColor"/></svg>
+                </button>
+            </nav>
+        </header>
+
+        <!-- Customization Panel -->
+        <div class="customization-panel" id="customizationPanel">
+            <div class="sheet-handle"></div>
+            <div class="panel-header" id="panelHeader">
+                <span class="panel-title">Customization</span>
+                <svg class="panel-arrow" id="panelArrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6.5L8 9.5L11 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            
+            <div class="panel-content" id="panelContent">
+                <div class="control-section">
+                    <label class="control-label">Font</label>
+                    <div class="custom-select" id="fontSelect">
+                        <span class="select-value">Inter</span>
+                        <svg class="select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6.5L8 9.5L11 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <div class="select-options">
+                            <div class="select-option" data-value="system">Inter</div>
+                            <div class="select-option" data-value="Suisse">Suisse Intl</div>
+                            <div class="select-option" data-value="serif">Serif</div>
+                            <div class="select-option" data-value="sans-serif">Sans Serif</div>
+                            <div class="select-option" data-value="monospace">Monospace</div>
+                            <div class="select-option" data-value="Georgia">Georgia</div>
+                            <div class="select-option" data-value="Times">Times</div>
+                            <div class="select-option" data-value="Arial">Arial</div>
+                            <div class="select-option" data-value="Helvetica">Helvetica</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <label class="control-label">Text & Content style</label>
+                    <div class="button-group">
+                        <button class="style-button" id="threeDButton" data-style="3d">
+                            <svg class="button-icon-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1.5L2.5 4.5v7L8 14.5l5.5-3v-7L8 1.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="8" y1="7.5" x2="8" y2="14.5" stroke="currentColor" stroke-width="1.5"/><line x1="2.5" y1="4.5" x2="8" y2="7.5" stroke="currentColor" stroke-width="1.5"/><line x1="13.5" y1="4.5" x2="8" y2="7.5" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </button>
+                        <button class="style-button" id="handDrawnButton" data-style="hand-drawn">
+                            <svg class="button-icon-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.66665 14.3333L5.36616 12.9104C5.60279 12.8194 5.7211 12.7739 5.83179 12.7145C5.93012 12.6617 6.02385 12.6008 6.11201 12.5324C6.21126 12.4554 6.3009 12.3658 6.48017 12.1865L14 4.66667C14.7364 3.93029 14.7364 2.73638 14 2C13.2636 1.26362 12.0697 1.26362 11.3333 2L3.8135 9.51981C3.63423 9.69908 3.5446 9.78872 3.46758 9.88797C3.39916 9.97613 3.33825 10.0699 3.28547 10.1682C3.22605 10.2789 3.18055 10.3972 3.08954 10.6338L1.66665 14.3333ZM1.66665 14.3333L3.03873 10.766C3.13691 10.5107 3.186 10.3831 3.27021 10.3246C3.34379 10.2735 3.43485 10.2542 3.52285 10.271C3.62354 10.2902 3.72024 10.3869 3.91364 10.5803L5.4197 12.0864C5.6131 12.2798 5.7098 12.3765 5.72903 12.4772C5.74583 12.5652 5.72651 12.6562 5.67541 12.7298C5.61695 12.814 5.48931 12.8631 5.23403 12.9613L1.66665 14.3333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <button class="style-button" id="waterButton" data-style="water">
+                            <svg class="button-icon-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 14.3333C9.23768 14.3333 10.4247 13.8417 11.2998 12.9665C12.175 12.0913 12.6667 10.9043 12.6667 9.66667C12.6667 8.33333 12 7.06667 10.6667 6C9.33333 4.93333 8.33333 3.33333 8 1.66667C7.66667 3.33333 6.66667 4.93333 5.33333 6C4 7.06667 3.33333 8.33333 3.33333 9.66667C3.33333 10.9043 3.825 12.0913 4.70017 12.9665C5.57534 13.8417 6.76232 14.3333 8 14.3333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <label class="control-label">Text color</label>
+                    <div class="custom-select color-select" id="textColorSelect">
+                        <span class="color-preview" id="colorPreview"></span>
+                        <span class="select-value" id="colorSelectValue">Default</span>
+                        <svg class="select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6.5L8 9.5L11 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <div class="color-picker-panel" id="colorPickerPanel">
+                            <div class="cp-spectrum-wrap">
+                                <canvas class="cp-spectrum" id="cpSpectrum" width="196" height="140"></canvas>
+                                <div class="cp-cursor" id="cpCursor"></div>
+                            </div>
+                            <div class="cp-hue-wrap">
+                                <canvas class="cp-hue" id="cpHue" width="196" height="14"></canvas>
+                                <div class="cp-hue-cursor" id="cpHueCursor"></div>
+                            </div>
+                            <div class="cp-presets">
+                                <button class="cp-preset cp-preset-default" data-color="default" title="Default"></button>
+                                <button class="cp-preset" data-color="#000000" style="background:#000000" title="Black"></button>
+                                <button class="cp-preset" data-color="#6b7280" style="background:#6b7280" title="Gray"></button>
+                                <button class="cp-preset" data-color="#1d4ed8" style="background:#1d4ed8" title="Blue"></button>
+                                <button class="cp-preset" data-color="#059669" style="background:#059669" title="Green"></button>
+                                <button class="cp-preset" data-color="#dc2626" style="background:#dc2626" title="Red"></button>
+                                <button class="cp-preset" data-color="#7c3aed" style="background:#7c3aed" title="Purple"></button>
+                                <button class="cp-preset" data-color="#d97706" style="background:#d97706" title="Amber"></button>
+                            </div>
+                            <div class="cp-hex-row">
+                                <span class="cp-hex-label">#</span>
+                                <input class="cp-hex-input" id="cpHexInput" type="text" maxlength="6" value="000000" spellcheck="false">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-section" data-control="corner-radius">
+                    <label class="control-label">Corner radius</label>
+                    <div class="radius-slider-wrapper">
+                        <input type="range" id="radiusSlider" class="radius-slider" min="0" max="32" value="16" step="1">
+                        <span class="radius-value" id="radiusValue">16</span>
+                    </div>
+                </div>
+
+                <div class="control-section" data-control="logo-size">
+                    <label class="control-label" id="logoSizeLabel">Logo size</label>
+                    <div class="radius-slider-wrapper">
+                        <input type="range" id="logoSizeSlider" class="radius-slider" min="10" max="24" value="14" step="1">
+                        <span class="radius-value" id="logoSizeValue">14</span>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <label class="control-label">Background style</label>
+                    <div class="custom-select" id="backgroundSelect">
+                        <span class="select-value">Default</span>
+                        <svg class="select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 6.5L8 9.5L11 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <div class="select-options">
+                            <div class="select-option" data-value="default">Default</div>
+                            <div class="select-option" data-value="gradient-sunset">Sunset</div>
+                            <div class="select-option" data-value="gradient-ocean">Ocean</div>
+                            <div class="select-option" data-value="gradient-forest">Forest</div>
+                            <div class="select-option" data-value="gradient-lavender">Lavender</div>
+                            <div class="select-option" data-value="pattern-dots">Dots</div>
+                            <div class="select-option" data-value="pattern-grid">Grid</div>
+                            <div class="select-option" data-value="pattern-waves">Waves</div>
+                            <div class="select-option" data-value="pattern-noise">Noise</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="reset-button" id="resetButton">Reset all</button>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <section class="about-section">
+                <div class="about-text">
+                    <p class="about-bio">I’m a designer who likes turning ideas into things that actually work.</p>
+                    <p class="about-bio">I work across product, visual, and interaction design — shaping everything from early concepts and user flows to polished interfaces and design systems. I care about the details that make a product feel clear, useful, and enjoyable.</p>
+                    <p class="about-bio">I also like building what I design. When an idea needs to move beyond a prototype, I turn it into a real working experience using SwiftUI, Kotlin, or web technologies. It helps me understand the product beyond the pixels and push ideas further.</p>
+                    <p class="about-bio">These days, I’m exploring AI-first ways of researching, designing, prototyping, and building — using AI to explore more ideas, move faster, and create better products.</p>
+                    <p class="about-bio">You can find me on <a href="https://www.behance.net/kirtidhwajpatra" class="inline-link" target="_blank" rel="noopener noreferrer">Behance</a>, <a href="https://github.com/kirtidhwajpatra" class="inline-link" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://apps.apple.com/kz/developer/kirtidhwaj-patra/id1869673839" class="inline-link" target="_blank" rel="noopener noreferrer">App Store</a>, <a href="https://linkedin.com/in/kirtidhwaj-patra" class="inline-link" target="_blank" rel="noopener noreferrer">LinkedIn</a> and <a href="https://leetcode.com/kirtidhwajpatra2" class="inline-link" target="_blank" rel="noopener noreferrer">LeetCode</a>,<br class="desktop-break"><span class="or-inline-space"> </span>or reach me by <a href="mailto:kirtidhwajpatra@gmail.com" class="inline-link">email</a>.</p>
+                </div>
+            </section>
+
+                        <section class="work-section">
+                <div class="work-tabs" role="tablist" aria-label="Work categories">
+                    <button id="tabUiUx" class="work-tab-btn" role="tab" aria-selected="true" aria-controls="panelUiUx" type="button">UI / UX</button>
+                    <button id="tabSocial" class="work-tab-btn" role="tab" aria-selected="false" aria-controls="panelSocial" type="button">Social Media</button>
+                    <button id="tabPrint" class="work-tab-btn" role="tab" aria-selected="false" aria-controls="panelPrint" type="button" hidden style="display: none;">Print</button>
+                    <button id="tabIdentity" class="work-tab-btn" role="tab" aria-selected="false" aria-controls="panelIdentity" type="button">Identity</button>
+                    <button id="tabBranding" class="work-tab-btn" role="tab" aria-selected="false" aria-controls="panelBranding" type="button" hidden style="display: none;">Branding</button>
+                </div>
+
+                <div class="work-tabs-stage" id="workTabsStage" data-active="uiux">
+                    <!-- Tab 1: UI / UX -->
+                    <div class="work-tab-panel is-active" id="panelUiUx" role="tabpanel" aria-labelledby="tabUiUx" data-panel="uiux">
+                        <div class="video-grid-wrapper">
+                            <div class="video-grid">
+                                <div class="video-col">
+                                    <!-- UI/UX Project 1: Solace Hospital -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/solace-hospital.png" alt="Solace Hospital — Healthcare & Telemedicine iOS App" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">Solace Hospital</p>
+                                            <p class="video-item-desc">Healthcare & Telemedicine iOS App</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- UI/UX Project 2: Habit Tracker -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/habit-tracker.png" alt="Habit Tracker — Daily Routine & Habit Tracking iOS App" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">Habit Tracker</p>
+                                            <p class="video-item-desc">Daily Routine & Habit Tracking iOS App</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- UI/UX Project 3: Voice Studio -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/voice-studio.png" alt="Voice Studio — Audio Production & DSP Sound Suite iOS App" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">Voice Studio</p>
+                                            <p class="video-item-desc">Audio Production & DSP Sound Suite iOS App</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- UI/UX Project 4: PrettyPlot -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/prettyplot-land.png" alt="PrettyPlot — Land Details & Cadastral Mapping App" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">PrettyPlot</p>
+                                            <p class="video-item-desc">Land Details, Cadastral Maps & Registry App</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="video-col">
+                                    <!-- UI/UX Project 5: POP -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/pop-reward.png" alt="POP — FinTech Rewards & POPcoin Digital Wallet" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">POP</p>
+                                            <p class="video-item-desc">FinTech Rewards & POPcoin Digital Wallet</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- UI/UX Project 6: Canon Sales Portal -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/canon-portal.png" alt="Canon Sales Portal — Enterprise Sales Rewards & Incentive Dashboard" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">Canon Sales Portal</p>
+                                            <p class="video-item-desc">Enterprise Sales Rewards & Incentive Dashboard</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- UI/UX Project 7: Shell Rewards -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/shell-app.png" alt="Shell Rewards — Automotive Service & Fuel Rewards iOS App" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">Shell Rewards</p>
+                                            <p class="video-item-desc">Automotive Service & Fuel Rewards iOS App</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- UI/UX Project 8: English Ji -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/english-ji.png" alt="English Ji — Language Learning & Conversational Partner iOS App" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">English Ji</p>
+                                            <p class="video-item-desc">Language Learning & Conversational Partner iOS App</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Social Media (Dedicated 3×3 Masonry Grid) -->
+                    <div class="work-tab-panel" id="panelSocial" role="tabpanel" aria-labelledby="tabSocial" data-panel="social">
+                        <div class="social-tab-container">
+                            <div class="social-masonry-grid">
+                                <!-- Column 1 (18 Creatives) -->
+                                <div class="social-masonry-col">
+                                    <!-- Creative: 0590f01d-1746-466d-934e-a83d6365d493 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/0590f01d-1746-466d-934e-a83d6365d493.jpg" alt="0590f01d 1746 466d 934e a83d6365d493" loading="eager">
+                                    </div>
+
+                                    <!-- Creative: 234dd3wd -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/234dd3wd.png" alt="234dd3wd" loading="eager">
+                                    </div>
+
+                                    <!-- Creative: 23sgt4wd -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/23sgt4wd.png" alt="23sgt4wd" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 2d16d963-dc5e-47b0-add0-d72f8af0e48e -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/2d16d963-dc5e-47b0-add0-d72f8af0e48e.jpg" alt="2d16d963 dc5e 47b0 add0 d72f8af0e48e" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 3233 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/3233.png" alt="3233" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 3243423 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/3243423.png" alt="3243423" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 397ehdbs -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/397ehdbs.png" alt="397ehdbs" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 5a76c4b0-0572-4888-b8c1-d9e7157d76c7 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/5a76c4b0-0572-4888-b8c1-d9e7157d76c7.jpg" alt="5a76c4b0 0572 4888 b8c1 d9e7157d76c7" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 78d87626-c58a-41c8-883b-648e811de328 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/78d87626-c58a-41c8-883b-648e811de328.jpg" alt="78d87626 c58a 41c8 883b 648e811de328" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 8997 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/8997.png" alt="8997" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: Chandrabhaga -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/Chandrabhaga.png" alt="Chandrabhaga" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: ChatGPT Image Sep 23, 2026, 08_57_30 PM -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/ChatGPT%20Image%20Sep%2023%2C%202026%2C%2008_57_30%20PM.png" alt="ChatGPT Image Sep 23, 2026, 08 57 30 PM" loading="lazy">
+                                    </div>
+
+                                    <!-- Video Creative -->
+                                    <div class="social-post-card">
+                                        <video src="imgs/work/SocialMedia/Pal%20Heights.mp4" poster="imgs/work/SocialMedia/Pal%20Heights-poster.jpg" autoplay loop muted playsinline></video>
+                                    </div>
+
+                                    <!-- Creative: aa4c0819-a0e7-4174-8e76-b3bf9f419a7c -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/aa4c0819-a0e7-4174-8e76-b3bf9f419a7c.jpg" alt="aa4c0819 a0e7 4174 8e76 b3bf9f419a7c" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: akeel kulprit post44 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/akeel%20kulprit%20post44.png" alt="akeel kulprit post44" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: d6527a8c-e40e-4f35-bfb4-017199f0fe6d -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/d6527a8c-e40e-4f35-bfb4-017199f0fe6d.jpg" alt="d6527a8c e40e 4f35 bfb4 017199f0fe6d" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: f41cc073-e39d-4c51-b176-6b7f4b7f1d7f -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/f41cc073-e39d-4c51-b176-6b7f4b7f1d7f.jpg" alt="f41cc073 e39d 4c51 b176 6b7f4b7f1d7f" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: fda04f42-00ff-4ee3-9025-b72f1a510e65 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/fda04f42-00ff-4ee3-9025-b72f1a510e65.png" alt="fda04f42 00ff 4ee3 9025 b72f1a510e65" loading="lazy">
+                                    </div>
+
+                                </div>
+
+                                <!-- Column 2 (18 Creatives) -->
+                                <div class="social-masonry-col">
+                                    <!-- Creative: 1036ef3b-b3cc-438d-ac23-68e7b27aa0ed -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/1036ef3b-b3cc-438d-ac23-68e7b27aa0ed.jpg" alt="1036ef3b b3cc 438d ac23 68e7b27aa0ed" loading="eager">
+                                    </div>
+
+                                    <!-- Creative: 234dsd -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/234dsd.jpg" alt="234dsd" loading="eager">
+                                    </div>
+
+                                    <!-- Creative: 24343eed -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/24343eed.png" alt="24343eed" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 2d8f1348-e1af-421e-b6b9-3ffe23415836 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/2d8f1348-e1af-421e-b6b9-3ffe23415836.jpg" alt="2d8f1348 e1af 421e b6b9 3ffe23415836" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 324253 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/324253.png" alt="324253" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 324ewfd -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/324ewfd.png" alt="324ewfd" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 443a7ba4-3d87-4e3e-87a8-d13f5839e4cb -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/443a7ba4-3d87-4e3e-87a8-d13f5839e4cb.jpg" alt="443a7ba4 3d87 4e3e 87a8 d13f5839e4cb" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 673c8f3a-53c7-495e-a70b-7f8a29649e08 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/673c8f3a-53c7-495e-a70b-7f8a29649e08.jpg" alt="673c8f3a 53c7 495e a70b 7f8a29649e08" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 7c95e6fd-2f09-458d-9bf6-f37926696941 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/7c95e6fd-2f09-458d-9bf6-f37926696941.jpg" alt="7c95e6fd 2f09 458d 9bf6 f37926696941" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 9ee677e4-934a-4e16-92f2-080fc5f7628e -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/9ee677e4-934a-4e16-92f2-080fc5f7628e.jpg" alt="9ee677e4 934a 4e16 92f2 080fc5f7628e" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: ChatGPT Image Sep 23, 2026, 08_35_55 PM -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/ChatGPT%20Image%20Sep%2023%2C%202026%2C%2008_35_55%20PM.png" alt="ChatGPT Image Sep 23, 2026, 08 35 55 PM" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: Did you know (1) -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/Did%20you%20know%20%281%29.png" alt="Did you know (1)" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: Post1 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/Post1.png" alt="Post1" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: af095b53-e958-471b-86fc-4680395ae860 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/af095b53-e958-471b-86fc-4680395ae860.jpg" alt="af095b53 e958 471b 86fc 4680395ae860" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: b3bf59b3-4693-4e05-ab59-70a67749a9e8 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/b3bf59b3-4693-4e05-ab59-70a67749a9e8.jpg" alt="b3bf59b3 4693 4e05 ab59 70a67749a9e8" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: d7b4c614-472d-4638-bef4-a07ff481ba18 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/d7b4c614-472d-4638-bef4-a07ff481ba18.jpg" alt="d7b4c614 472d 4638 bef4 a07ff481ba18" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: f65e78aa-c30b-42d2-9132-98c8ecc77498 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/f65e78aa-c30b-42d2-9132-98c8ecc77498.jpg" alt="f65e78aa c30b 42d2 9132 98c8ecc77498" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: hasslefreetravel #2 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/hasslefreetravel%20%232.png" alt="hasslefreetravel #2" loading="lazy">
+                                    </div>
+
+                                </div>
+
+                                <!-- Column 3 (17 Creatives) -->
+                                <div class="social-masonry-col">
+                                    <!-- Creative: 234dd -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/234dd.png" alt="234dd" loading="eager">
+                                    </div>
+
+                                    <!-- Creative: 23dsedc -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/23dsedc.jpg" alt="23dsedc" loading="eager">
+                                    </div>
+
+                                    <!-- Creative: 2a8aac8b-7d50-4605-a903-9884201e4c8c -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/2a8aac8b-7d50-4605-a903-9884201e4c8c.jpg" alt="2a8aac8b 7d50 4605 a903 9884201e4c8c" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 3208dhsdh -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/3208dhsdh.png" alt="3208dhsdh" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 32432 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/32432.png" alt="32432" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 354325d -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/354325d.png" alt="354325d" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 479c9cca-c812-4aea-bdb2-58c7b964d0df -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/479c9cca-c812-4aea-bdb2-58c7b964d0df.jpg" alt="479c9cca c812 4aea bdb2 58c7b964d0df" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 68226e3a-e30e-4249-a7fa-01f051f9f588 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/68226e3a-e30e-4249-a7fa-01f051f9f588.jpg" alt="68226e3a e30e 4249 a7fa 01f051f9f588" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: 7we3hd -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/7we3hd.png" alt="7we3hd" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: Banking exam Rakesh agarwal -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/Banking%20exam%20Rakesh%20agarwal.jpg" alt="Banking exam Rakesh agarwal" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: ChatGPT Image Sep 23, 2026, 08_39_32 PM -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/ChatGPT%20Image%20Sep%2023%2C%202026%2C%2008_39_32%20PM.png" alt="ChatGPT Image Sep 23, 2026, 08 39 32 PM" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: GLOBAL SUPPLY CHAIN POST -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/GLOBAL%20SUPPLY%20CHAIN%20POST.png" alt="GLOBAL SUPPLY CHAIN POST" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: a909c9c8-e0d7-4319-b2a1-35dce62cb668 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/a909c9c8-e0d7-4319-b2a1-35dce62cb668.jpg" alt="a909c9c8 e0d7 4319 b2a1 35dce62cb668" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: air conditioned bus -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/air%20conditioned%20bus.jpg" alt="air conditioned bus" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: c6d00904-42e3-4e9e-a78f-6830a357b188 -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/c6d00904-42e3-4e9e-a78f-6830a357b188.jpg" alt="c6d00904 42e3 4e9e a78f 6830a357b188" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: enviroment day shrinath2 copy@4x -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/enviroment%20day%20shrinath2%20copy%404x.png" alt="enviroment day shrinath2 copy@4x" loading="lazy">
+                                    </div>
+
+                                    <!-- Creative: fd296878-9d73-4600-aa30-d1cd329b984b -->
+                                    <div class="social-post-card">
+                                        <img src="imgs/work/SocialMedia/fd296878-9d73-4600-aa30-d1cd329b984b.jpg" alt="fd296878 9d73 4600 aa30 d1cd329b984b" loading="lazy">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3: Print -->
+                    <div class="work-tab-panel" id="panelPrint" role="tabpanel" aria-labelledby="tabPrint" data-panel="print" hidden style="display: none;">
+                        <div class="video-grid-wrapper">
+                            <div class="video-grid">
+                                <div class="video-col">
+                                    <!-- Print Project 1: Swiss Typographic Posters -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/poster-series.jpg" alt="Swiss Typographic Posters — Modern Exhibition & Gallery Series" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">Swiss Typographic Posters</p>
+                                            <p class="video-item-desc">International Exhibition Poster Series & Print Collateral</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Print Project 2: Trendspotting Magazine -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/trendspotting-magazine.png" alt="Trendspotting Magazine — Editorial Publication & Print Typography" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">Trendspotting Magazine</p>
+                                            <p class="video-item-desc">Editorial Publication & Curated Print Typography</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="video-col">
+                                    <!-- Print Project 3: Prime Residences Brochure -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/realestate-brochure.png" alt="Prime Residences — Luxury Architecture Editorial Brochure" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">Prime Residences</p>
+                                            <p class="video-item-desc">Luxury Architecture Editorial Brochure & Print Layout</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Print Project 4: Architectural Property Showcase -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/Realeste-brochure.png" alt="Architectural Property Showcase — Editorial Print Brochure" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">Architectural Property Showcase</p>
+                                            <p class="video-item-desc">High-End Real Estate Editorial Print Collateral</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                                                            <!-- Tab 4: Identity (Dedicated 2×2 Grid of all logos from foliologo - Randomized Order) -->
+                    <div class="work-tab-panel" id="panelIdentity" role="tabpanel" aria-labelledby="tabIdentity" data-panel="identity">
+                        <div class="identity-tab-container">
+                            <div class="identity-grid">
+                                <!-- Logo 01: Frame 9502 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209502.png" alt="Brand Identity & Logomark — Frame 9502" loading="eager">
+                                </div>
+
+                                <!-- Logo 02: Frame 9498 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209498.png" alt="Brand Identity & Logomark — Frame 9498" loading="eager">
+                                </div>
+
+                                <!-- Logo 03: Frame 9495 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209495.png" alt="Brand Identity & Logomark — Frame 9495" loading="eager">
+                                </div>
+
+                                <!-- Logo 04: Frame 9518 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209518.png" alt="Brand Identity & Logomark — Frame 9518" loading="eager">
+                                </div>
+
+                                <!-- Logo 05: Frame 9505 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209505.png" alt="Brand Identity & Logomark — Frame 9505" loading="lazy">
+                                </div>
+
+                                <!-- Logo 06: Frame 9492 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209492.png" alt="Brand Identity & Logomark — Frame 9492" loading="lazy">
+                                </div>
+
+                                <!-- Logo 07: Frame 9491 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209491.png" alt="Brand Identity & Logomark — Frame 9491" loading="lazy">
+                                </div>
+
+                                <!-- Logo 08: Frame 9496 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209496.png" alt="Brand Identity & Logomark — Frame 9496" loading="lazy">
+                                </div>
+
+                                <!-- Logo 09: Frame 9501 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209501.png" alt="Brand Identity & Logomark — Frame 9501" loading="lazy">
+                                </div>
+
+                                <!-- Logo 10: Frame 9508 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209508.png" alt="Brand Identity & Logomark — Frame 9508" loading="lazy">
+                                </div>
+
+                                <!-- Logo 11: Frame 9497 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209497.png" alt="Brand Identity & Logomark — Frame 9497" loading="lazy">
+                                </div>
+
+                                <!-- Logo 12: Frame 9504 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209504.png" alt="Brand Identity & Logomark — Frame 9504" loading="lazy">
+                                </div>
+
+                                <!-- Logo 13: Frame 9487 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209487.png" alt="Brand Identity & Logomark — Frame 9487" loading="lazy">
+                                </div>
+
+                                <!-- Logo 14: Frame 9500 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209500.png" alt="Brand Identity & Logomark — Frame 9500" loading="lazy">
+                                </div>
+
+                                <!-- Logo 15: Frame 9516 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209516.png" alt="Brand Identity & Logomark — Frame 9516" loading="lazy">
+                                </div>
+
+                                <!-- Logo 16: Frame 9499 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209499.png" alt="Brand Identity & Logomark — Frame 9499" loading="lazy">
+                                </div>
+
+                                <!-- Logo 17: Frame 9488 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209488.png" alt="Brand Identity & Logomark — Frame 9488" loading="lazy">
+                                </div>
+
+                                <!-- Logo 18: Frame 9503 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209503.png" alt="Brand Identity & Logomark — Frame 9503" loading="lazy">
+                                </div>
+
+                                <!-- Logo 19: Frame 9517 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209517.png" alt="Brand Identity & Logomark — Frame 9517" loading="lazy">
+                                </div>
+
+                                <!-- Logo 20: Frame 9490 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209490.png" alt="Brand Identity & Logomark — Frame 9490" loading="lazy">
+                                </div>
+
+                                <!-- Logo 21: Frame 9507 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209507.png" alt="Brand Identity & Logomark — Frame 9507" loading="lazy">
+                                </div>
+
+                                <!-- Logo 22: Frame 9493 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209493.png" alt="Brand Identity & Logomark — Frame 9493" loading="lazy">
+                                </div>
+
+                                <!-- Logo 23: Frame 9494 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209494.png" alt="Brand Identity & Logomark — Frame 9494" loading="lazy">
+                                </div>
+
+                                <!-- Logo 24: Frame 9509 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209509.png" alt="Brand Identity & Logomark — Frame 9509" loading="lazy">
+                                </div>
+
+                                <!-- Logo 25: Frame 9486 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209486.png" alt="Brand Identity & Logomark — Frame 9486" loading="lazy">
+                                </div>
+
+                                <!-- Logo 26: Frame 9489 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209489.png" alt="Brand Identity & Logomark — Frame 9489" loading="lazy">
+                                </div>
+
+                                <!-- Logo 27: Frame 9506 -->
+                                <div class="identity-card">
+                                    <img src="imgs/work/foliologo/Frame%209506.png" alt="Brand Identity & Logomark — Frame 9506" loading="lazy">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 5: Branding -->
+                    <div class="work-tab-panel" id="panelBranding" role="tabpanel" aria-labelledby="tabBranding" data-panel="branding" hidden style="display: none;">
+                        <div class="video-grid-wrapper">
+                            <div class="video-grid">
+                                <div class="video-col">
+                                    <!-- Branding Project 1: Solstice Coffee Roasters -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/solstice-coffee.jpg" alt="Solstice Coffee Roasters — Brand Identity & Packaging Suite" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">Solstice Coffee Roasters</p>
+                                            <p class="video-item-desc">Specialty Coffee Brand Identity & Packaging Suite</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Branding Project 2: Shell Automotive -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/shell-automotive.png" alt="Shell Automotive — Global Mobility & Service Station Brand System" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">Shell Automotive</p>
+                                            <p class="video-item-desc">Global Mobility & Service Station Brand System</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="video-col">
+                                    <!-- Branding Project 3: HPE Enterprise Systems -->
+                                    <div class="video-item">
+                                        <img src="imgs/work/hpe-enterprise.png" alt="HPE Enterprise — 3D Isometric Iconography & Cloud Infrastructure Systems" loading="lazy">
+                                        <div class="video-item-meta">
+                                            <p class="video-item-title">HPE Enterprise Systems</p>
+                                            <p class="video-item-desc">3D Isometric Iconography & Cloud Infrastructure Systems</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <div class="footer-wrapper">
+            <footer class="site-footer">
+                <span>© 2026 Kirtidhwaj Patra</span>
+                <nav class="footer-links">
+                    <a href="mailto:kirtidhwajpatra@gmail.com">Email</a>
+                    <a href="https://kirtidhwaj.in">Portfolio</a>
+                    <a href="https://www.behance.net/kirtidhwajpatra" target="_blank" rel="noopener noreferrer">Behance</a>
+                    <a href="https://github.com/kirtidhwajpatra" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://linkedin.com/in/kirtidhwaj-patra" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://apps.apple.com/kz/developer/kirtidhwaj-patra/id1869673839" target="_blank" rel="noopener noreferrer">App Store</a>
+                    <a href="https://leetcode.com/kirtidhwajpatra2" target="_blank" rel="noopener noreferrer">LeetCode</a>
+                </nav>
+            </footer>
+        </div>
+    </div>
+
+    <div class="sheet-overlay" id="sheetOverlay"></div>
+
+    <!-- SVG filters for hand-drawn sketch effect -->
+    <svg width="0" height="0" style="position:absolute">
+        <filter id="sketchy" filterUnits="objectBoundingBox" x="-5%" y="-5%" width="110%" height="110%">
+            <feTurbulence type="turbulence" baseFrequency="0.035 0.065" numOctaves="3" seed="2" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+        <filter id="sketchy-subtle" filterUnits="objectBoundingBox" x="-3%" y="-3%" width="106%" height="106%">
+            <feTurbulence type="turbulence" baseFrequency="0.03 0.05" numOctaves="2" seed="2" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </svg>
+
+    <script src="lqip.js?v=20260921_10"></script>
+    <script src="script.js?v=20260921_10"></script>
+</body>
+</html>
