@@ -2512,24 +2512,31 @@ class WorkTabs {
             { id: 'identity', btn: document.getElementById('tabIdentity'), panel: document.getElementById('panelIdentity') },
             { id: 'uiux', btn: document.getElementById('tabUiUx'), panel: document.getElementById('panelUiUx') },
             { id: 'social', btn: document.getElementById('tabSocial'), panel: document.getElementById('panelSocial') },
+            { id: 'packaging', btn: document.getElementById('tabPackaging'), panel: document.getElementById('panelPackaging') },
             { id: 'print', btn: document.getElementById('tabPrint'), panel: document.getElementById('panelPrint') },
             { id: 'branding', btn: document.getElementById('tabBranding'), panel: document.getElementById('panelBranding') }
         ];
-        // Only active/visible tabs participate in selection and keyboard navigation
-        this.tabs = this.allTabs.filter(t => t.btn && !t.btn.hidden && t.btn.style.display !== 'none');
+        this.updateVisibleTabs();
         if (!this.stage || !this.tabs.length) return;
         this.bindEvents();
     }
 
+    updateVisibleTabs() {
+        this.tabs = this.allTabs.filter(t => t.btn && !t.btn.hidden && t.btn.style.display !== 'none');
+    }
+
     bindEvents() {
-        this.tabs.forEach((tab, index) => {
+        this.allTabs.forEach((tab) => {
             if (!tab.btn) return;
             tab.btn.addEventListener('click', () => this.select(tab.id));
             tab.btn.addEventListener('keydown', (e) => {
                 if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
                 e.preventDefault();
+                this.updateVisibleTabs();
+                const currentIndex = this.tabs.findIndex(t => t.id === tab.id);
+                if (currentIndex === -1) return;
                 const dir = e.key === 'ArrowRight' ? 1 : -1;
-                const next = this.tabs[(index + dir + this.tabs.length) % this.tabs.length];
+                const next = this.tabs[(currentIndex + dir + this.tabs.length) % this.tabs.length];
                 this.select(next.id);
                 if (next.btn) next.btn.focus();
             });
@@ -2988,6 +2995,13 @@ class CreativesProgressLoader {
                 loader: document.getElementById('socialCreativesLoader'),
                 loaderWrapper: document.getElementById('socialCreativesLoaderWrapper'),
                 itemSelector: '.social-post-card img, .social-post-card video'
+            },
+            {
+                id: 'packaging',
+                panel: document.getElementById('panelPackaging'),
+                loader: document.getElementById('packagingCreativesLoader'),
+                loaderWrapper: document.getElementById('packagingCreativesLoaderWrapper'),
+                itemSelector: '.packaging-card img'
             }
         ];
 
@@ -3005,7 +3019,7 @@ class CreativesProgressLoader {
 
             items.forEach(el => {
                 const markLoaded = () => {
-                    const card = el.closest('.social-post-card, .identity-card, .video-item');
+                    const card = el.closest('.social-post-card, .identity-card, .video-item, .packaging-card');
                     if (card) {
                         card.classList.add('is-loaded', 'loaded');
                     }
@@ -3063,7 +3077,7 @@ class CreativesProgressLoader {
             rootMargin: '800px 0px 800px 0px'
         });
 
-        document.querySelectorAll('.social-post-card, .identity-card, .video-item').forEach(card => {
+        document.querySelectorAll('.social-post-card, .identity-card, .video-item, .packaging-card').forEach(card => {
             preloader.observe(card);
         });
     }
@@ -3087,12 +3101,156 @@ class CreativesProgressLoader {
     }
 }
 
+// ============================================================
+// Packaging Tab Geo Gate (Visible ONLY to visitors outside India)
+// ============================================================
+async function initPackagingGeoGate() {
+    const tabPackaging = document.getElementById('tabPackaging');
+    const panelPackaging = document.getElementById('panelPackaging');
+    if (!tabPackaging || !panelPackaging) return;
+
+    const showPackaging = () => {
+        tabPackaging.hidden = false;
+        tabPackaging.style.display = '';
+        panelPackaging.hidden = false;
+        panelPackaging.style.display = '';
+        if (window.workTabsInstance) {
+            window.workTabsInstance.updateVisibleTabs();
+        }
+        if (window.creativesLoaderInstance) {
+            window.creativesLoaderInstance.refresh();
+        }
+    };
+
+    const hidePackaging = () => {
+        tabPackaging.hidden = true;
+        tabPackaging.style.display = 'none';
+        panelPackaging.hidden = true;
+        panelPackaging.style.display = 'none';
+        if (window.workTabsInstance) {
+            window.workTabsInstance.updateVisibleTabs();
+            const currentActive = document.getElementById('workTabsStage')?.getAttribute('data-active');
+            if (currentActive === 'packaging') {
+                window.workTabsInstance.select('identity');
+            }
+        }
+    };
+
+    // Testing helper functions available in browser console
+    window.testPackagingTab = function(enable) {
+        if (enable) {
+            localStorage.setItem('forcePackagingGeo', 'intl');
+            showPackaging();
+            console.log('%c[Packaging Tab]%c Forced ON (International Mode)', 'color: #10b981; font-weight: bold;', 'color: inherit;');
+        } else {
+            localStorage.setItem('forcePackagingGeo', 'in');
+            hidePackaging();
+            console.log('%c[Packaging Tab]%c Forced OFF (India Mode)', 'color: #ef4444; font-weight: bold;', 'color: inherit;');
+        }
+    };
+
+    window.clearPackagingTabTest = function() {
+        localStorage.removeItem('forcePackagingGeo');
+        console.log('%c[Packaging Tab]%c Override cleared. Detecting live location...', 'color: #3b82f6;', 'color: inherit;');
+        initPackagingGeoGate();
+    };
+
+    // 0. Explicit URL override: ?geo=intl or ?geo=in or ?packaging=true
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('geo')) {
+        const val = urlParams.get('geo').toLowerCase();
+        if (['intl', 'outside', 'us', 'uk', 'global', 'true', '1'].includes(val)) {
+            showPackaging();
+            return;
+        }
+        if (['in', 'india', 'false', '0'].includes(val)) {
+            hidePackaging();
+            return;
+        }
+    }
+    if (urlParams.has('packaging')) {
+        if (urlParams.get('packaging') !== 'false') {
+            showPackaging();
+            return;
+        } else {
+            hidePackaging();
+            return;
+        }
+    }
+
+    // Explicit localStorage override from testPackagingTab
+    const savedGeo = localStorage.getItem('forcePackagingGeo');
+    if (savedGeo === 'intl') {
+        showPackaging();
+        return;
+    }
+    if (savedGeo === 'in') {
+        hidePackaging();
+        return;
+    }
+
+    // 1. Primary: Cloudflare edge trace (/cdn-cgi/trace) - instant, native to Cloudflare
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        const res = await fetch('/cdn-cgi/trace', { signal: controller.signal, cache: 'no-store' });
+        clearTimeout(timeoutId);
+        if (res.ok) {
+            const text = await res.text();
+            const match = text.match(/^loc=([A-Z]{2})$/m);
+            if (match && match[1]) {
+                const country = match[1];
+                if (country !== 'IN') {
+                    showPackaging();
+                    return;
+                } else {
+                    hidePackaging();
+                    return;
+                }
+            }
+        }
+    } catch (_) {}
+
+    // 2. Secondary fallback: api.country.is (useful when testing locally on localhost)
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        const res = await fetch('https://api.country.is', { signal: controller.signal });
+        clearTimeout(timeoutId);
+        if (res.ok) {
+            const data = await res.json();
+            if (data && data.country) {
+                if (data.country !== 'IN') {
+                    showPackaging();
+                    return;
+                } else {
+                    hidePackaging();
+                    return;
+                }
+            }
+        }
+    } catch (_) {}
+
+    // 3. Timezone heuristic fallback
+    try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (tz && (tz === 'Asia/Kolkata' || tz === 'Asia/Calcutta')) {
+            hidePackaging();
+            return;
+        }
+    } catch (_) {}
+
+    // Default: remain hidden
+    hidePackaging();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     new ThemeManager();
     window.customizationPanelInstance = new CustomizationPanel();
     window.videoHandlerInstance = new VideoHandler();
     window.workTabsInstance = new WorkTabs();
     window.creativesLoaderInstance = new CreativesProgressLoader();
+    initPackagingGeoGate();
     initSocialModal();
     initProjectThumbnailLqip();
     initLibrariesInstallCount();

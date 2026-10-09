@@ -174,6 +174,7 @@
                     <button id="tabIdentity" class="work-tab-btn" role="tab" aria-selected="true" aria-controls="panelIdentity" type="button">Identity</button>
                     <button id="tabUiUx" class="work-tab-btn" role="tab" aria-selected="false" aria-controls="panelUiUx" type="button">UI / UX</button>
                     <button id="tabSocial" class="work-tab-btn" role="tab" aria-selected="false" aria-controls="panelSocial" type="button">Social Media</button>
+                    <button id="tabPackaging" class="work-tab-btn" role="tab" aria-selected="false" aria-controls="panelPackaging" type="button" hidden style="display: none;">Packaging</button>
                     <button id="tabPrint" class="work-tab-btn" role="tab" aria-selected="false" aria-controls="panelPrint" type="button" hidden style="display: none;">Print</button>
                     <button id="tabBranding" class="work-tab-btn" role="tab" aria-selected="false" aria-controls="panelBranding" type="button" hidden style="display: none;">Branding</button>
                 </div>
@@ -700,6 +701,30 @@
                             </div>
                             <div class="creatives-loader-wrapper" id="socialCreativesLoaderWrapper">
                                 <div class="creatives-loader" id="socialCreativesLoader" role="status" aria-live="polite">
+                                    <span class="creatives-spinner" aria-hidden="true"></span>
+                                    <span class="creatives-loader-text">Loading more creatives...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Packaging (Visible only to visitors outside India) -->
+                    <div class="work-tab-panel" id="panelPackaging" role="tabpanel" aria-labelledby="tabPackaging" data-panel="packaging" hidden style="display: none;">
+                        <div class="packaging-tab-container">
+                            <div class="packaging-grid">
+                                <!-- Packaging Showcase Card: Single Card (1 Grid) -->
+                                <div class="packaging-card">
+                                    <div class="packaging-image-wrapper">
+                                        <img src="imgs/work/solstice-coffee.jpg" alt="Packaging & Label Design" loading="lazy">
+                                    </div>
+                                    <div class="packaging-card-meta">
+                                        <p class="packaging-card-title">Solstice Coffee Roasters</p>
+                                        <p class="packaging-card-desc">Specialty Coffee Packaging & Custom Label Design</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="creatives-loader-wrapper" id="packagingCreativesLoaderWrapper">
+                                <div class="creatives-loader" id="packagingCreativesLoader" role="status" aria-live="polite">
                                     <span class="creatives-spinner" aria-hidden="true"></span>
                                     <span class="creatives-loader-text">Loading more creatives...</span>
                                 </div>
