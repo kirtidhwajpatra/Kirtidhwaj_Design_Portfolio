@@ -3102,24 +3102,252 @@ class CreativesProgressLoader {
 }
 
 // ============================================================
-// Packaging Tab (Available Worldwide to All Visitors)
+// Packaging Tab Geo Gate (Hidden in India, Visible Outside India)
 // ============================================================
-function initPackagingGeoGate() {
+async function initPackagingGeoGate() {
     const tabPackaging = document.getElementById('tabPackaging');
     const panelPackaging = document.getElementById('panelPackaging');
     if (!tabPackaging || !panelPackaging) return;
 
-    tabPackaging.hidden = false;
-    tabPackaging.style.display = '';
-    panelPackaging.hidden = false;
-    panelPackaging.style.display = '';
+    const showPackaging = () => {
+        tabPackaging.hidden = false;
+        tabPackaging.style.display = '';
+        panelPackaging.hidden = false;
+        panelPackaging.style.display = '';
+        if (window.workTabsInstance) {
+            window.workTabsInstance.updateVisibleTabs();
+        }
+        if (window.creativesLoaderInstance) {
+            window.creativesLoaderInstance.refresh();
+        }
+    };
 
-    if (window.workTabsInstance) {
-        window.workTabsInstance.updateVisibleTabs();
+    const hidePackaging = () => {
+        tabPackaging.hidden = true;
+        tabPackaging.style.display = 'none';
+        panelPackaging.hidden = true;
+        panelPackaging.style.display = 'none';
+        if (window.workTabsInstance) {
+            window.workTabsInstance.updateVisibleTabs();
+            const currentActive = document.getElementById('workTabsStage')?.getAttribute('data-active');
+            if (currentActive === 'packaging') {
+                window.workTabsInstance.select('identity');
+            }
+        }
+    };
+
+    // Testing helper functions available in browser console
+    window.testPackagingTab = function(enable) {
+        if (enable) {
+            localStorage.setItem('forcePackagingGeo', 'intl');
+            showPackaging();
+            console.log('%c[Packaging Tab]%c Forced ON (International Mode)', 'color: #10b981; font-weight: bold;', 'color: inherit;');
+        } else {
+            localStorage.setItem('forcePackagingGeo', 'in');
+            hidePackaging();
+            console.log('%c[Packaging Tab]%c Forced OFF (India Mode)', 'color: #ef4444; font-weight: bold;', 'color: inherit;');
+        }
+    };
+
+    window.clearPackagingTabTest = function() {
+        localStorage.removeItem('forcePackagingGeo');
+        console.log('%c[Packaging Tab]%c Override cleared. Detecting live location...', 'color: #3b82f6;', 'color: inherit;');
+        initPackagingGeoGate();
+    };
+
+    // 0. Explicit URL override: ?geo=intl or ?geo=in or ?packaging=true
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('geo')) {
+        const val = urlParams.get('geo').toLowerCase();
+        if (['intl', 'outside', 'us', 'uk', 'global', 'true', '1'].includes(val)) {
+            showPackaging();
+            return;
+        }
+        if (['in', 'india', 'false', '0'].includes(val)) {
+            hidePackaging();
+            return;
+        }
     }
-    if (window.creativesLoaderInstance) {
-        window.creativesLoaderInstance.refresh();
+    if (urlParams.has('packaging')) {
+        if (urlParams.get('packaging') !== 'false') {
+            showPackaging();
+            return;
+        } else {
+            hidePackaging();
+            return;
+        }
     }
+
+    // Explicit localStorage override from testPackagingTab
+    const savedGeo = localStorage.getItem('forcePackagingGeo');
+    if (savedGeo === 'intl') {
+        showPackaging();
+        return;
+    }
+    if (savedGeo === 'in') {
+        hidePackaging();
+        return;
+    }
+
+    // 1. Timezone heuristic: if client timezone is India, strictly hide
+    try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (tz === 'Asia/Kolkata' || tz === 'Asia/Calcutta') {
+            hidePackaging();
+            return;
+        }
+    } catch (_) {}
+
+    // 2. Cloudflare trace (/cdn-cgi/trace)
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        const res = await fetch('/cdn-cgi/trace', { signal: controller.signal, cache: 'no-store' });
+        clearTimeout(timeoutId);
+        if (res.ok) {
+            const text = await res.text();
+            const match = text.match(/^loc=([A-Z]{2})$/m);
+            if (match && match[1]) {
+                const country = match[1];
+                if (country === 'IN') {
+                    hidePackaging();
+                    return;
+                } else {
+                    showPackaging();
+                    return;
+                }
+            }
+        }
+    } catch (_) {}
+
+    // 3. Fast external IP geolocation check: api.country.is
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        const res = await fetch('https://api.country.is', { signal: controller.signal });
+        clearTimeout(timeoutId);
+        if (res.ok) {
+            const data = await res.json();
+            if (data && data.country) {
+                if (data.country === 'IN') {
+                    hidePackaging();
+                    return;
+                } else {
+                    showPackaging();
+                    return;
+                }
+            }
+        }
+    } catch (_) {}
+
+    // 4. Secondary external IP geolocation fallback: ipapi.co
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        const res = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+        clearTimeout(timeoutId);
+        if (res.ok) {
+            const data = await res.json();
+            if (data && (data.country_code || data.country)) {
+                const country = data.country_code || data.country;
+                if (country === 'IN') {
+                    hidePackaging();
+                    return;
+                } else {
+                    showPackaging();
+                    return;
+                }
+            }
+        }
+    } catch (_) {}
+
+    // Default: remain hidden
+    hidePackaging();
+}
+
+// ============================================================
+// Creative Asset Protection & Anti-Save / Anti-Screenshot Suite
+// ============================================================
+function initAssetProtection() {
+    // 1. Disable Right-Click Context Menu across page and creative media
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+    }, { capture: true });
+
+    // 2. Prevent dragging images / media to desktop, browser tabs, or other apps
+    document.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+        return false;
+    }, { capture: true });
+
+    // 3. Prevent copying creative images / text in work sections
+    document.addEventListener('copy', (e) => {
+        if (e.target.closest('img, video, .packaging-card, .identity-card, .social-post-card, .video-item, .work-section')) {
+            e.preventDefault();
+            return false;
+        }
+    }, { capture: true });
+
+    document.addEventListener('cut', (e) => {
+        e.preventDefault();
+        return false;
+    }, { capture: true });
+
+    // 4. Block saving, printing, viewing source, and inspection keyboard shortcuts
+    window.addEventListener('keydown', (e) => {
+        const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+        const modKey = isMac ? e.metaKey : e.ctrlKey;
+        const key = e.key ? e.key.toLowerCase() : '';
+
+        // Ctrl+S / Cmd+S (Save Page)
+        if (modKey && key === 's') {
+            e.preventDefault();
+            return false;
+        }
+
+        // Ctrl+P / Cmd+P (Print to PDF / Printer)
+        if (modKey && key === 'p') {
+            e.preventDefault();
+            return false;
+        }
+
+        // Ctrl+U / Cmd+Option+U (View Source)
+        if ((modKey && key === 'u') || (e.altKey && modKey && key === 'u')) {
+            e.preventDefault();
+            return false;
+        }
+
+        // F12 (DevTools)
+        if (e.key === 'F12') {
+            e.preventDefault();
+            return false;
+        }
+
+        // Ctrl+Shift+I / Cmd+Option+I (Inspect Element)
+        // Ctrl+Shift+J / Cmd+Option+J (Console)
+        // Ctrl+Shift+C / Cmd+Option+C (Element Inspector)
+        if ((modKey && e.shiftKey && ['i', 'j', 'c'].includes(key)) ||
+            (isMac && e.altKey && modKey && ['i', 'j', 'c'].includes(key))) {
+            e.preventDefault();
+            return false;
+        }
+
+        // PrintScreen Key (Clear clipboard)
+        if (e.key === 'PrintScreen') {
+            try { navigator.clipboard?.writeText?.(''); } catch (_) {}
+            e.preventDefault();
+            return false;
+        }
+    }, { capture: true });
+
+    // 5. Intercept beforeprint / afterprint to block PDF / print output
+    window.addEventListener('beforeprint', () => {
+        document.body.style.display = 'none';
+    });
+    window.addEventListener('afterprint', () => {
+        document.body.style.display = '';
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -3128,6 +3356,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.videoHandlerInstance = new VideoHandler();
     window.workTabsInstance = new WorkTabs();
     window.creativesLoaderInstance = new CreativesProgressLoader();
+    initAssetProtection();
     initPackagingGeoGate();
     initSocialModal();
     initProjectThumbnailLqip();

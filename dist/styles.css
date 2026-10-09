@@ -4070,3 +4070,70 @@ body.hand-drawn .video-item:hover,
         font-size: 12px;
     }
 }
+
+/* ============================================================
+   Creative Protection & Anti-Save / Anti-Screenshot Security
+   ============================================================ */
+
+/* Disable selection across the site to deter copying content */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Retain text selection for email link */
+a[href^="mailto:"] {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Protection for images, videos, canvas, and creative containers */
+img,
+video,
+canvas,
+picture,
+svg,
+.identity-card,
+.packaging-card,
+.social-post-card,
+.video-item,
+.project-card,
+.work-tab-panel,
+.social-fullscreen-container {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-user-drag: none !important;
+    -khtml-user-drag: none !important;
+    -moz-user-drag: none !important;
+    -o-user-drag: none !important;
+    user-drag: none !important;
+    -webkit-touch-callout: none !important; /* Disables mobile long-press "Save Image" context popup */
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Pointer shield on creative images to prevent browser direct-image save/copy actions */
+.identity-card img,
+.packaging-card img,
+.social-post-card img,
+.video-item img,
+.project-card img {
+    pointer-events: none !important;
+    -webkit-user-drag: none !important;
+}
+
+/* Blank output if printing or exporting to PDF */
+@media print {
+    html, body {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+}
